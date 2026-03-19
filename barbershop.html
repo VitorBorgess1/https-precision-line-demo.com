@@ -1,0 +1,2617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRECISION LINE BARBERSHOP — Blue Springs, MO</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B1A1A;
+    --crimson-deep: #6B0F0F;
+    --crimson-bright: #C0272D;
+    --crimson-distressed: #9E2020;
+    --carbon: #0A0A0A;
+    --matte-black: #111111;
+    --charcoal: #1A1A1A;
+    --dark-wood: #1C1410;
+    --concrete-dark: #1E1E1E;
+    --concrete-mid: #252525;
+    --concrete-light: #2E2E2E;
+    --brass: #B8922A;
+    --brass-light: #D4A83A;
+    --brass-distressed: #9A7820;
+    --gold-amber: #C9973A;
+    --white: #F5F0E8;
+    --off-white: #E8E0D0;
+    --light-grey: #A8A0A0;
+    --metal-border: #5A4A4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--carbon);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ===================== TEXTURES & PATTERNS ===================== */
+
+  .texture-concrete {
+    background-color: var(--concrete-dark);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeBlend in='SourceGraphic' mode='multiply'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E"),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,0.01) 3px,
+        rgba(255,255,255,0.01) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 5px,
+        rgba(0,0,0,0.2) 5px,
+        rgba(0,0,0,0.2) 6px
+      );
+  }
+
+  .texture-dark-wood {
+    background-color: var(--dark-wood);
+    background-image:
+      repeating-linear-gradient(
+        92deg,
+        transparent,
+        transparent 8px,
+        rgba(0,0,0,0.3) 8px,
+        rgba(0,0,0,0.3) 9px,
+        transparent 9px,
+        transparent 18px,
+        rgba(255,255,255,0.015) 18px,
+        rgba(255,255,255,0.015) 20px
+      ),
+      repeating-linear-gradient(
+        88deg,
+        transparent,
+        transparent 25px,
+        rgba(0,0,0,0.1) 25px,
+        rgba(0,0,0,0.1) 26px
+      ),
+      linear-gradient(180deg, #1C1410 0%, #140E08 50%, #1C1410 100%);
+  }
+
+  .texture-brushed-metal {
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      linear-gradient(180deg, #2A2A2A, #1A1A1A, #222);
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  /* ===================== HEADER ===================== */
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184, 146, 42, 0.2);
+    padding: 0 4vw;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 46px;
+    height: 46px;
+    position: relative;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .logo-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 300;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--brass);
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  nav a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--brass);
+    transition: width 0.3s;
+  }
+
+  nav a:hover { color: var(--brass); }
+  nav a:hover::after { width: 100%; }
+
+  .btn-book-now {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--carbon);
+    background: var(--brass);
+    background-image: linear-gradient(135deg, var(--brass-light) 0%, var(--brass) 50%, var(--brass-distressed) 100%);
+    border: none;
+    padding: 11px 26px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    transition: filter 0.2s, transform 0.2s;
+    box-shadow: 0 2px 12px rgba(184, 146, 42, 0.4);
+  }
+
+  .btn-book-now:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+  }
+
+  /* ===================== HERO ===================== */
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 72px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(105deg, rgba(0,0,0,0.92) 0%, rgba(10,0,0,0.75) 45%, rgba(0,0,0,0.85) 100%),
+      /* Simulated barbershop environment */
+      radial-gradient(ellipse at 70% 40%, rgba(139,26,26,0.15) 0%, transparent 60%),
+      repeating-linear-gradient(
+        92deg,
+        rgba(255,255,255,0.015) 0px,
+        rgba(255,255,255,0.015) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        2deg,
+        rgba(255,255,255,0.01) 0px,
+        rgba(255,255,255,0.01) 1px,
+        transparent 1px,
+        transparent 60px
+      );
+    background-size: auto, auto, auto, auto;
+    background-color: #0E0808;
+  }
+
+  /* Simulated shop photo with CSS */
+  .hero-photo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 52%;
+    background:
+      linear-gradient(90deg, rgba(10,8,8,1) 0%, rgba(10,8,8,0.6) 25%, transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 30%, rgba(0,0,0,0.5) 100%);
+    background-color: #181010;
+    overflow: hidden;
+  }
+
+  .hero-shop-art {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+  }
+
+  /* Barbershop chair silhouette art */
+  .shop-environment {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 60% 80%, rgba(139,26,26,0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(184,146,42,0.1) 0%, transparent 40%),
+      linear-gradient(180deg, #0D0808 0%, #1A1010 30%, #0A0808 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4vw;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--brass);
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+    line-height: 1.0;
+    color: var(--white);
+    max-width: 720px;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+  }
+
+  .hero-headline .accent {
+    color: var(--crimson-bright);
+    display: block;
+    font-style: italic;
+  }
+
+  .hero-headline .brass-line {
+    color: var(--brass);
+  }
+
+  .precision-line {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--crimson-bright), transparent);
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .precision-line::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--crimson-bright);
+    clip-path: polygon(0 50%, 100% 0%, 100% 100%);
+  }
+
+  .hero-sub {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--off-white);
+    opacity: 0.85;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .hero-sub strong {
+    color: var(--brass);
+    font-weight: 600;
+  }
+
+  .hero-sub-2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--light-grey);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn-cta-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--crimson);
+    background-image: linear-gradient(135deg, var(--crimson-bright) 0%, var(--crimson) 50%, var(--crimson-deep) 100%);
+    padding: 15px 32px;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: filter 0.2s, transform 0.2s;
+    box-shadow: 0 4px 20px rgba(192, 39, 45, 0.5);
+    /* Texture overlay */
+    overflow: hidden;
+  }
+
+  .btn-cta-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.04) 2px,
+      rgba(255,255,255,0.04) 4px
+    );
+  }
+
+  .btn-cta-primary:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(192, 39, 45, 0.6);
+  }
+
+  .btn-cta-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    background: transparent;
+    border: 1px solid rgba(192, 39, 45, 0.6);
+    padding: 14px 30px;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: all 0.2s;
+    overflow: hidden;
+  }
+
+  .btn-cta-secondary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--crimson);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn-cta-secondary:hover::before { opacity: 1; }
+  .btn-cta-secondary:hover { color: var(--white); }
+  .btn-cta-secondary span { position: relative; z-index: 1; }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 60px;
+    right: 5vw;
+    width: 110px;
+    height: 110px;
+    z-index: 3;
+  }
+
+  /* ===================== SECTION HEADER SHARED ===================== */
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--brass);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--brass);
+  }
+
+  /* ===================== OUR STORY ===================== */
+
+  .story-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 680px;
+    overflow: hidden;
+  }
+
+  .story-left {
+    position: relative;
+    padding: 80px 60px 80px 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .story-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #1D1D1D;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeBlend in='SourceGraphic' mode='multiply'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.6'/%3E%3C/svg%3E"),
+      linear-gradient(135deg, #1E1E1E 0%, #181818 100%);
+    z-index: 0;
+  }
+
+  /* Concrete crack lines */
+  .story-left::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(23deg, transparent 42%, rgba(255,255,255,0.025) 42.5%, transparent 43%),
+      linear-gradient(158deg, transparent 65%, rgba(255,255,255,0.02) 65.3%, transparent 65.6%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.012) 60px,
+        rgba(255,255,255,0.012) 61px
+      );
+    z-index: 0;
+  }
+
+  .story-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .story-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+
+  .story-headline .red { color: var(--crimson-bright); font-style: italic; }
+
+  .story-divider {
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--brass), transparent);
+    margin-bottom: 28px;
+  }
+
+  .story-text {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: rgba(232, 224, 208, 0.82);
+    max-width: 420px;
+  }
+
+  .story-text strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .story-badge-wrap {
+    margin-top: 40px;
+  }
+
+  .story-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool-photo-frame {
+    position: absolute;
+    inset: 40px;
+    border: 3px solid var(--crimson);
+    box-shadow:
+      inset 0 0 30px rgba(139, 26, 26, 0.3),
+      0 0 0 1px rgba(192, 39, 45, 0.2),
+      0 20px 60px rgba(0,0,0,0.6);
+    overflow: hidden;
+    background: #120A0A;
+  }
+
+  .tool-photo-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Simulated barber tools image */
+  .barber-tools-art {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 30% 70%, rgba(184,146,42,0.2) 0%, transparent 40%),
+      radial-gradient(ellipse at 70% 30%, rgba(139,26,26,0.3) 0%, transparent 45%),
+      linear-gradient(160deg, #1A1010 0%, #0D0808 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tool-photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(192, 39, 45, 0.15);
+    pointer-events: none;
+  }
+
+  .corner-accent {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--brass);
+    border-style: solid;
+  }
+
+  .corner-accent.tl { top: -3px; left: -3px; border-width: 3px 0 0 3px; }
+  .corner-accent.tr { top: -3px; right: -3px; border-width: 3px 3px 0 0; }
+  .corner-accent.bl { bottom: -3px; left: -3px; border-width: 0 0 3px 3px; }
+  .corner-accent.br { bottom: -3px; right: -3px; border-width: 0 3px 3px 0; }
+
+  /* ===================== COMMUNITY ===================== */
+
+  .community-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+
+  .community-left {
+    position: relative;
+    padding: 80px 60px 80px 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .community-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #202020;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 8px,
+        rgba(255,255,255,0.015) 8px,
+        rgba(255,255,255,0.015) 9px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 12px,
+        rgba(0,0,0,0.2) 12px,
+        rgba(0,0,0,0.2) 13px
+      ),
+      linear-gradient(135deg, #222 0%, #1A1A1A 100%);
+  }
+
+  .community-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .community-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .community-headline .red { color: var(--crimson-bright); font-style: italic; }
+
+  .community-text {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(232, 224, 208, 0.8);
+    margin-bottom: 40px;
+  }
+
+  .community-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .community-photo {
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .community-photo-inner {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(192, 39, 45, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .community-photo-art {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+  }
+
+  .community-photo:hover .community-photo-art {
+    transform: scale(1.05);
+  }
+
+  .community-photo-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent);
+    padding: 12px 8px 6px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--brass);
+    text-transform: uppercase;
+  }
+
+  .community-right {
+    background:
+      radial-gradient(ellipse at 40% 60%, rgba(139,26,26,0.12) 0%, transparent 60%),
+      #0F0F0F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+  }
+
+  .community-quote-block {
+    max-width: 380px;
+    text-align: center;
+  }
+
+  .community-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--off-white);
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .community-quote::before {
+    content: '"';
+    font-size: 5rem;
+    color: var(--crimson);
+    opacity: 0.3;
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .quote-author {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--brass);
+    text-transform: uppercase;
+  }
+
+  /* ===================== SERVICES ===================== */
+
+/* ===================== REFINED SERVICES SECTION ===================== */
+
+  .services-section {
+    position: relative;
+    padding: 100px 5vw;
+    background: var(--carbon);
+    overflow: hidden;
+  }
+
+  .services-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Grid industrial mais sutil */
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 0;
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .services-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .services-headline .red { 
+    color: var(--crimson-bright); 
+    font-style: italic; 
+    text-shadow: 0 0 15px rgba(192, 39, 45, 0.4);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-card {
+    position: relative;
+    padding: 45px 30px;
+    cursor: pointer;
+    overflow: hidden;
+    background: #121212; /* Base escura para descansar os olhos */
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .service-card-bg {
+    position: absolute;
+    inset: 0;
+    /* Gradiente radial que cria profundidade sem excesso de cor */
+    background: radial-gradient(circle at center, rgba(192, 39, 45, 0.15) 0%, transparent 70%);
+    /* Textura de metal escovado/pontilhado sutil */
+    background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H2V1z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    transition: transform 0.6s, opacity 0.4s;
+    opacity: 0.6;
+  }
+
+  .service-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--crimson-bright);
+    box-shadow: 0 15px 45px rgba(192, 39, 45, 0.2);
+  }
+
+  .service-card:hover .service-card-bg {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  /* Borda Crimson sutil ao redor do card */
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(192, 39, 45, 0.2);
+    z-index: 3;
+    pointer-events: none;
+    transition: border-color 0.3s;
+  }
+
+  .service-card:hover::before {
+    border-color: var(--crimson-bright);
+  }
+
+  /* Detalhe de couro na base (mais discreto) */
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--crimson);
+    box-shadow: 0 -2px 10px var(--crimson-deep);
+    z-index: 4;
+  }
+
+  /* Cantoneiras de Latão (Brass) */
+  .service-card-corners {
+    position: absolute;
+    inset: 12px;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover .service-card-corners {
+    opacity: 1;
+  }
+
+  .card-corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: var(--brass);
+    border-style: solid;
+  }
+
+  .card-corner.tl { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; }
+  .card-corner.tr { top: 0; right: 0; border-width: 1.5px 1.5px 0 0; }
+  .card-corner.bl { bottom: 0; left: 0; border-width: 0 0 1.5px 1.5px; }
+  .card-corner.br { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; }
+
+  .service-icon {
+    position: relative;
+    z-index: 6;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 25px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--crimson);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--crimson-bright);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+  }
+
+  .service-card:hover .service-icon {
+    background: var(--crimson);
+    color: var(--white);
+    transform: rotate(5deg) scale(1.1);
+  }
+
+  .service-title {
+    position: relative;
+    z-index: 6;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: var(--white); /* Texto branco para leitura limpa */
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  .service-desc {
+    position: relative;
+    z-index: 6;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6); /* Cinza claro para não cansar a vista */
+    font-weight: 300;
+    margin-bottom: 25px;
+  }
+
+  .service-price {
+    position: relative;
+    z-index: 6;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--brass); /* Destaque no preço com dourado */
+    letter-spacing: 0.05em;
+  }
+
+  .service-price span {
+    font-size: 0.8rem;
+    font-weight: 400;
+    opacity: 0.5;
+    color: var(--white);
+  }
+
+  /* ===================== MERCH ===================== */
+
+  .merch-section {
+    position: relative;
+    padding: 100px 5vw;
+    overflow: hidden;
+  }
+
+  .merch-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--dark-wood);
+    background-image:
+      repeating-linear-gradient(
+        91deg,
+        rgba(0,0,0,0.25) 0px,
+        rgba(0,0,0,0.25) 1px,
+        transparent 1px,
+        transparent 7px,
+        rgba(255,255,255,0.02) 7px,
+        rgba(255,255,255,0.02) 8px,
+        transparent 8px,
+        transparent 20px
+      ),
+      repeating-linear-gradient(
+        89deg,
+        transparent,
+        transparent 35px,
+        rgba(0,0,0,0.1) 35px,
+        rgba(0,0,0,0.1) 37px
+      ),
+      linear-gradient(180deg, #1A1208 0%, #120E06 50%, #1A1208 100%);
+  }
+
+  .merch-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .merch-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .merch-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .merch-headline .red { color: var(--crimson-bright); font-style: italic; }
+
+  .merch-sub {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(232, 224, 208, 0.65);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .merch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .merch-card {
+    position: relative;
+    background: rgba(0,0,0,0.4);
+    transition: transform 0.3s;
+  }
+
+  .merch-card:hover { transform: translateY(-5px); }
+
+  /* Distressed metal frame */
+  .merch-frame {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border: 2px solid;
+    border-image: linear-gradient(
+      135deg,
+      #8A7840,
+      #5A4A30,
+      #B8922A,
+      #4A3A20,
+      #9A8030,
+      #6A5A28
+    ) 1;
+    box-shadow:
+      inset 0 0 40px rgba(0,0,0,0.5),
+      0 4px 20px rgba(0,0,0,0.6),
+      0 0 0 4px rgba(26,18,4,0.8);
+  }
+
+  .merch-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border: 1px solid rgba(184,146,42,0.15);
+    pointer-events: none;
+  }
+
+  /* Frame corner rivets */
+  .frame-rivet {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 35% 35%, var(--brass-light), var(--brass-distressed));
+    border-radius: 50%;
+    z-index: 4;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .frame-rivet.tl { top: 8px; left: 8px; }
+  .frame-rivet.tr { top: 8px; right: 8px; }
+  .frame-rivet.bl { bottom: 8px; left: 8px; }
+  .frame-rivet.br { bottom: 8px; right: 8px; }
+
+  .merch-photo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Apparel art simulation */
+  .apparel-bg-1 {
+    background: linear-gradient(160deg, #1A1A1A 0%, #111 100%);
+  }
+
+  .apparel-bg-2 {
+    background: linear-gradient(160deg, #0D0D0D 0%, #181818 100%);
+  }
+
+  .apparel-bg-3 {
+    background: linear-gradient(160deg, #151515 0%, #0A0A0A 100%);
+  }
+
+  .apparel-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(139,26,26,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 80%, rgba(184,146,42,0.08) 0%, transparent 40%);
+  }
+
+  .apparel-label-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--crimson);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    padding: 4px 10px;
+    text-transform: uppercase;
+    z-index: 5;
+  }
+
+  .merch-info {
+    padding: 24px 20px 28px;
+  }
+
+  .merch-category {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .merch-item-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .merch-desc {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(232, 224, 208, 0.65);
+    margin-bottom: 16px;
+  }
+
+  .merch-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .merch-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--brass);
+    letter-spacing: 0.05em;
+  }
+
+  .btn-view-details {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    background: transparent;
+    border: 1px solid rgba(192, 39, 45, 0.5);
+    padding: 8px 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-view-details:hover {
+    background: var(--crimson);
+    border-color: var(--crimson);
+  }
+
+  .merch-community-bar {
+    margin-top: 60px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .community-brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid rgba(184, 146, 42, 0.3);
+    padding: 16px 32px;
+    background: rgba(0,0,0,0.4);
+  }
+
+  .community-brand-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--off-white);
+  }
+
+  .community-brand-text strong {
+    color: var(--brass);
+    font-style: normal;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ===================== CONTACT ===================== */
+
+  .contact-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+
+  .contact-left {
+    position: relative;
+    padding: 80px 60px 80px 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #1E1E1E;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeBlend in='SourceGraphic' mode='multiply'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"),
+      linear-gradient(135deg, #202020 0%, #181818 100%);
+  }
+
+  .contact-content { position: relative; z-index: 1; }
+
+  .contact-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .contact-headline .red { color: var(--crimson-bright); font-style: italic; }
+
+  .contact-sub {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(232, 224, 208, 0.65);
+    margin-bottom: 36px;
+    letter-spacing: 0.03em;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .form-field {
+    position: relative;
+  }
+
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(192, 39, 45, 0.4);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.85rem;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color: var(--crimson-bright);
+    background: rgba(255,255,255,0.07);
+  }
+
+  .form-field textarea { resize: vertical; min-height: 90px; }
+
+  .form-field select { appearance: none; cursor: pointer; }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder {
+    color: rgba(232, 224, 208, 0.35);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-submit {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    color: var(--white);
+    background: linear-gradient(135deg, var(--crimson-bright), var(--crimson-deep));
+    border: none;
+    padding: 15px 40px;
+    text-transform: uppercase;
+    cursor: pointer;
+    align-self: flex-start;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: filter 0.2s, transform 0.2s;
+    box-shadow: 0 4px 16px rgba(192, 39, 45, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-submit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px);
+  }
+
+  .btn-submit:hover { filter: brightness(1.15); transform: translateY(-2px); }
+
+  .contact-right {
+    position: relative;
+    background: #141414;
+    overflow: hidden;
+  }
+
+  /* Map simulation */
+  .map-area {
+    width: 100%;
+    height: 100%;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px),
+      linear-gradient(180deg, #141414 0%, #0E0E0E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .map-pin-group {
+    position: relative;
+  }
+
+  .map-pin {
+    position: absolute;
+  }
+
+  .map-info-card {
+    background: rgba(10,10,10,0.95);
+    border: 1px solid rgba(184,146,42,0.3);
+    padding: 24px 28px;
+    max-width: 280px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    position: relative;
+  }
+
+  .map-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--crimson), var(--brass));
+  }
+
+  .map-shop-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .map-address {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(232, 224, 208, 0.7);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .map-hours {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--gold-amber);
+    text-transform: uppercase;
+  }
+
+  /* ===================== FOOTER ===================== */
+
+  footer {
+    position: relative;
+    background: var(--carbon);
+    padding: 60px 5vw 40px;
+    overflow: hidden;
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg, transparent, transparent 30px,
+        rgba(255,255,255,0.008) 30px, rgba(255,255,255,0.008) 31px
+      ),
+      repeating-linear-gradient(
+        90deg, transparent, transparent 30px,
+        rgba(255,255,255,0.008) 30px, rgba(255,255,255,0.008) 31px
+      );
+  }
+
+  .footer-top-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--crimson), var(--brass), var(--crimson), transparent);
+  }
+
+  .footer-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 50px;
+  }
+
+  .footer-logo-col .logo-name {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .footer-brand-text {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(232, 224, 208, 0.55);
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201, 151, 58, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: var(--gold-amber);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .social-icon:hover {
+    background: rgba(201, 151, 58, 0.15);
+    border-color: var(--gold-amber);
+  }
+
+  .footer-col-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(232, 224, 208, 0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .footer-links a:hover { color: var(--off-white); }
+
+  .footer-address {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(232, 224, 208, 0.55);
+    line-height: 1.9;
+  }
+
+  .footer-address strong {
+    color: var(--gold-amber);
+    font-weight: 600;
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-copy {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(232, 224, 208, 0.3);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-copy span { color: var(--brass); }
+
+  /* ===================== BADGE SVG ===================== */
+
+  .badge-wrapper {
+    display: inline-block;
+  }
+
+  /* ===================== SCROLL ANIMATIONS ===================== */
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .anim-fade-up { animation: fadeUp 0.8s ease both; }
+  .anim-fade-up.delay-1 { animation-delay: 0.1s; }
+  .anim-fade-up.delay-2 { animation-delay: 0.2s; }
+  .anim-fade-up.delay-3 { animation-delay: 0.3s; }
+  .anim-fade-up.delay-4 { animation-delay: 0.4s; }
+  .anim-fade-up.delay-5 { animation-delay: 0.5s; }
+
+  /* ===================== PRECISION CUT ELEMENT ===================== */
+
+  .precision-mark {
+    position: absolute;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  /* ===================== DIVIDERS ===================== */
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(192,39,45,0.4), rgba(184,146,42,0.3), rgba(192,39,45,0.4), transparent);
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <svg class="logo-icon" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Comb + precision cut mark -->
+        <rect x="4" y="20" width="24" height="6" rx="1" fill="#B8922A" opacity="0.9"/>
+        <rect x="4" y="20" width="2" height="12" rx="0.5" fill="#B8922A"/>
+        <rect x="8" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+        <rect x="12" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+        <rect x="16" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+        <rect x="20" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+        <rect x="24" y="20" width="2" height="6" rx="0.5" fill="#B8922A"/>
+        <!-- Precision cut diagonal mark -->
+        <line x1="30" y1="8" x2="42" y2="38" stroke="#C0272D" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="30" cy="8" r="2" fill="#C0272D"/>
+        <polygon points="40,34 44,42 36,38" fill="#C0272D"/>
+        <!-- Small hash marks -->
+        <line x1="34" y1="16" x2="37" y2="13" stroke="#9A7820" stroke-width="1" opacity="0.7"/>
+        <line x1="36.5" y1="22" x2="39.5" y2="19" stroke="#9A7820" stroke-width="1" opacity="0.7"/>
+        <line x1="38.8" y1="28" x2="41.8" y2="25" stroke="#9A7820" stroke-width="1" opacity="0.7"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name">Precision Line</span>
+        <span class="logo-tagline">Blue Springs, MO · Est. 2019</span>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#community">Community</a>
+      <a href="#merch">Shop Merch</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn-book-now">Book Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-photo">
+    <div class="shop-environment"></div>
+    <!-- Barbershop environment SVG art -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.5" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+      <!-- Barber chair silhouette -->
+      <rect x="160" y="300" width="280" height="200" rx="8" fill="#1A0A0A" stroke="#3A1A1A" stroke-width="1"/>
+      <rect x="180" y="240" width="240" height="80" rx="30" fill="#1E0C0C" stroke="#2A1010" stroke-width="1"/>
+      <rect x="200" y="480" width="200" height="30" rx="4" fill="#150808"/>
+      <rect x="185" y="500" width="30" height="120" rx="4" fill="#1A0A0A"/>
+      <rect x="385" y="500" width="30" height="120" rx="4" fill="#1A0A0A"/>
+      <rect x="155" y="340" width="30" height="100" rx="4" fill="#1A0A0A"/>
+      <rect x="415" y="340" width="30" height="100" rx="4" fill="#1A0A0A"/>
+      <!-- Mirror frame -->
+      <rect x="60" y="40" width="480" height="280" rx="4" fill="none" stroke="#2A1A1A" stroke-width="3"/>
+      <rect x="65" y="45" width="470" height="270" rx="2" fill="#0D0808" opacity="0.8"/>
+      <!-- Barber pole subtle -->
+      <rect x="520" y="80" width="20" height="200" rx="10" fill="#1A1A1A" stroke="#2A1A1A" stroke-width="1"/>
+      <path d="M520 100 Q530 120 540 140 Q530 160 520 180 Q530 200 540 220 Q530 240 520 260" stroke="#8B1A1A" stroke-width="3" fill="none" opacity="0.6"/>
+      <!-- Shelf with products -->
+      <rect x="40" y="340" width="60" height="80" rx="2" fill="#1A1010" stroke="#2A1A1A" stroke-width="1" opacity="0.7"/>
+      <rect x="500" y="340" width="60" height="80" rx="2" fill="#1A1010" stroke="#2A1A1A" stroke-width="1" opacity="0.7"/>
+      <!-- Lighting glow -->
+      <ellipse cx="300" cy="50" rx="200" ry="30" fill="#B8922A" opacity="0.05"/>
+    </svg>
+  </div>
+
+  <!-- Precision cut mark overlay -->
+  <svg class="precision-mark" style="top:10%;right:30%;width:300px;height:300px;" viewBox="0 0 300 300">
+    <line x1="0" y1="0" x2="300" y2="300" stroke="#C0272D" stroke-width="1"/>
+    <line x1="0" y1="60" x2="240" y2="300" stroke="#C0272D" stroke-width="0.5"/>
+    <line x1="60" y1="0" x2="300" y2="240" stroke="#C0272D" stroke-width="0.5"/>
+    <circle cx="150" cy="150" r="3" fill="#C0272D"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow anim-fade-up">Blue Springs, MO · Premier Barbershop</div>
+
+    <h1 class="hero-headline anim-fade-up delay-1">
+      Precision Cuts.<br>
+      <span class="accent">Built by Community.</span>
+      <span class="brass-line">Local Roots.</span><br>
+    </h1>
+
+    <div class="precision-line anim-fade-up delay-2"></div>
+
+    <p class="hero-sub anim-fade-up delay-2">
+      More than a barbershop — <strong>a cultural institution</strong>. Where the craft of the cut meets the power of community. Every chair, every blade, every handshake.
+    </p>
+    <p class="hero-sub-2 anim-fade-up delay-3">Serving Blue Springs & the KC Metro · Walk-ins Welcome · Book Online</p>
+
+    <div class="hero-ctas anim-fade-up delay-4">
+      <a href="#contact" class="btn-cta-primary">Book Your Chair</a>
+      <a href="#merch" class="btn-cta-secondary"><span>Explore the Merch Line</span></a>
+    </div>
+  </div>
+
+  <!-- 5-Star Badge -->
+  <div class="hero-badge">
+    <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="55" cy="55" r="52" fill="none" stroke="#B8922A" stroke-width="1.5" opacity="0.8"/>
+      <circle cx="55" cy="55" r="46" fill="rgba(10,10,10,0.9)" stroke="#8B1A1A" stroke-width="1"/>
+      <circle cx="55" cy="55" r="40" fill="none" stroke="#B8922A" stroke-width="0.5" stroke-dasharray="2 3"/>
+      <text x="55" y="38" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="18" fill="#C0272D" letter-spacing="1">50+</text>
+      <text x="55" y="52" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="600" font-size="7.5" fill="#B8922A" letter-spacing="2">5-STAR</text>
+      <text x="55" y="64" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="600" font-size="7.5" fill="#B8922A" letter-spacing="1.5">REVIEWS</text>
+      <!-- Stars -->
+      <g fill="#B8922A">
+        <polygon points="55,70 57,76 63,76 58,80 60,86 55,82 50,86 52,80 47,76 53,76" transform="scale(0.7) translate(23, 30)"/>
+      </g>
+      <text x="55" y="82" text-anchor="middle" font-size="12" fill="#B8922A">★★★★★</text>
+      <text x="55" y="94" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="6.5" fill="rgba(232,224,208,0.5)" letter-spacing="1.5">GOOGLE VERIFIED</text>
+    </svg>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== OUR STORY ==================== -->
+<section class="story-section" id="about">
+  <div class="story-left">
+    <div class="story-content">
+      <div class="section-label">Our Story</div>
+      <h2 class="story-headline">
+        Tradition<br>
+        Meets<br>
+        <span class="red">Precision.</span>
+      </h2>
+      <div class="story-divider"></div>
+      <p class="story-text">
+        <strong>Precision Line</strong> was built from the ground up in the heart of Blue Springs, MO — a shop that carries the weight of tradition while cutting the edge of the modern game. We believe in old-school craft, sharp blades, clean lines, and the kind of community that turns a haircut into a moment worth repeating.
+        <br><br>
+        Every barber on this floor brought something real — years of experience, personal pride, and a commitment to making every client walk out better than they came in. This isn't just a barbershop. <strong>It's a standard.</strong>
+      </p>
+
+      <div class="story-badge-wrap">
+        <svg width="130" height="130" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hexagonal badge -->
+          <polygon points="65,4 118,33 118,97 65,126 12,97 12,33" fill="none" stroke="#B8922A" stroke-width="1.5" opacity="0.9"/>
+          <polygon points="65,12 110,37 110,91 65,116 20,91 20,37" fill="rgba(10,8,8,0.95)" stroke="#8B1A1A" stroke-width="1"/>
+          <polygon points="65,20 102,41 102,85 65,106 28,85 28,41" fill="none" stroke="#B8922A" stroke-width="0.5" stroke-dasharray="2,3"/>
+          <text x="65" y="52" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="22" fill="#C0272D" letter-spacing="1">50+</text>
+          <text x="65" y="64" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="7.5" fill="#B8922A" letter-spacing="2" font-weight="700">5-STAR</text>
+          <text x="65" y="75" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="7.5" fill="#B8922A" letter-spacing="1.5" font-weight="600">REVIEWS</text>
+          <text x="65" y="91" text-anchor="middle" font-size="13" fill="#B8922A">★★★★★</text>
+          <text x="65" y="103" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="6" fill="rgba(232,224,208,0.4)" letter-spacing="2">GOOGLE VERIFIED</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-right">
+    <div class="tool-photo-frame">
+      <div class="tool-photo-inner">
+        <div class="barber-tools-art">
+          <!-- Detailed barber tools SVG illustration -->
+          <svg viewBox="0 0 400 500" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background atmosphere -->
+            <rect width="400" height="500" fill="#100808"/>
+            <radialGradient id="toolGlow" cx="50%" cy="60%" r="60%">
+              <stop offset="0%" stop-color="#B8922A" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#8B1A1A" stop-opacity="0.05"/>
+            </radialGradient>
+            <rect width="400" height="500" fill="url(#toolGlow)"/>
+
+            <!-- Work surface / leather mat -->
+            <rect x="40" y="300" width="320" height="160" rx="4" fill="#1E1008" stroke="#3A2010" stroke-width="1"/>
+            <line x1="40" y1="310" x2="360" y2="310" stroke="#2A1808" stroke-width="1" opacity="0.5"/>
+
+            <!-- Straight razor (open) -->
+            <g transform="rotate(-20, 200, 200)">
+              <rect x="80" y="180" width="130" height="18" rx="2" fill="#A89060" stroke="#7A6840" stroke-width="1"/>
+              <!-- Blade shine -->
+              <line x1="85" y1="183" x2="205" y2="183" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+              <rect x="80" y="194" width="130" height="14" rx="2" fill="#C8A870" stroke="#9A7840" stroke-width="0.5"/>
+              <!-- Handle -->
+              <rect x="76" y="178" width="20" height="32" rx="3" fill="#3A2010" stroke="#5A3A18" stroke-width="1"/>
+              <circle cx="86" cy="188" r="2" fill="#B8922A"/>
+              <circle cx="86" cy="198" r="2" fill="#B8922A"/>
+              <!-- Blade tip precision -->
+              <polygon points="210,188 225,185 225,191" fill="#D0B880" stroke="#A08840" stroke-width="0.5"/>
+            </g>
+
+            <!-- Scissors -->
+            <g transform="translate(220, 120) rotate(15)">
+              <line x1="0" y1="0" x2="80" y2="100" stroke="#A8A0A0" stroke-width="5" stroke-linecap="round"/>
+              <line x1="10" y1="0" x2="90" y2="100" stroke="#A8A0A0" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="5" cy="8" r="10" fill="none" stroke="#A8A0A0" stroke-width="3"/>
+              <circle cx="15" cy="8" r="10" fill="none" stroke="#A8A0A0" stroke-width="3"/>
+              <!-- Shine -->
+              <line x1="3" y1="20" x2="75" y2="95" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            </g>
+
+            <!-- Comb -->
+            <g transform="translate(60, 140) rotate(-10)">
+              <rect x="0" y="0" width="140" height="22" rx="2" fill="#4A3020" stroke="#6A4830" stroke-width="1"/>
+              <!-- Teeth -->
+              <g fill="#3A2415">
+                <rect x="8" y="22" width="4" height="20" rx="1"/>
+                <rect x="16" y="22" width="3" height="18" rx="1"/>
+                <rect x="23" y="22" width="3" height="20" rx="1"/>
+                <rect x="30" y="22" width="3" height="18" rx="1"/>
+                <rect x="37" y="22" width="3" height="20" rx="1"/>
+                <rect x="44" y="22" width="3" height="18" rx="1"/>
+                <rect x="51" y="22" width="3" height="20" rx="1"/>
+                <rect x="58" y="22" width="4" height="18" rx="1"/>
+                <rect x="67" y="22" width="4" height="20" rx="1"/>
+                <rect x="76" y="22" width="4" height="18" rx="1"/>
+                <rect x="85" y="22" width="4" height="20" rx="1"/>
+                <rect x="94" y="22" width="4" height="18" rx="1"/>
+                <rect x="103" y="22" width="4" height="20" rx="1"/>
+                <rect x="112" y="22" width="4" height="18" rx="1"/>
+                <rect x="121" y="22" width="4" height="20" rx="1"/>
+                <rect x="130" y="22" width="4" height="18" rx="1"/>
+              </g>
+            </g>
+
+            <!-- Clippers -->
+            <g transform="translate(80, 280) rotate(-5)">
+              <rect x="0" y="0" width="50" height="120" rx="12" fill="#1E1E1E" stroke="#2E2E2E" stroke-width="1.5"/>
+              <rect x="5" y="5" width="40" height="30" rx="4" fill="#151515"/>
+              <rect x="8" y="110" width="34" height="12" rx="2" fill="#282828" stroke="#B8922A" stroke-width="0.5"/>
+              <!-- Blade -->
+              <rect x="5" y="108" width="40" height="4" fill="#A8A0A0"/>
+              <line x1="8" y1="110" x2="42" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+              <!-- Power button glow -->
+              <circle cx="25" cy="20" r="6" fill="#8B1A1A" opacity="0.8"/>
+              <circle cx="25" cy="20" r="3" fill="#C0272D"/>
+            </g>
+
+            <!-- Brush -->
+            <g transform="translate(270, 300) rotate(10)">
+              <rect x="0" y="0" width="25" height="80" rx="4" fill="#5A3820" stroke="#7A5030" stroke-width="1"/>
+              <rect x="-5" y="70" width="35" height="30" rx="3" fill="#3A2010"/>
+              <!-- Bristles -->
+              <g stroke="#C8B880" stroke-width="0.8" opacity="0.7">
+                <line x1="2" y1="100" x2="0" y2="115"/>
+                <line x1="6" y1="100" x2="4" y2="116"/>
+                <line x1="10" y1="100" x2="10" y2="116"/>
+                <line x1="14" y1="100" x2="14" y2="116"/>
+                <line x1="18" y1="100" x2="20" y2="116"/>
+                <line x1="22" y1="100" x2="25" y2="115"/>
+              </g>
+            </g>
+
+            <!-- Texture grain overlay -->
+            <rect width="400" height="500" fill="url(#grainPat)" opacity="0.08"/>
+            <defs>
+              <pattern id="grainPat" width="4" height="4" patternUnits="userSpaceOnUse">
+                <rect width="4" height="4" fill="none"/>
+                <circle cx="1" cy="1" r="0.5" fill="white" opacity="0.5"/>
+                <circle cx="3" cy="3" r="0.3" fill="white" opacity="0.3"/>
+              </pattern>
+            </defs>
+
+            <!-- Dramatic shadow/light -->
+            <radialGradient id="spotLight" cx="60%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="rgba(184,146,42,0.12)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+            </radialGradient>
+            <rect width="400" height="500" fill="url(#spotLight)"/>
+          </svg>
+        </div>
+      </div>
+      <!-- Corner accents on frame -->
+      <div class="corner-accent tl"></div>
+      <div class="corner-accent tr"></div>
+      <div class="corner-accent bl"></div>
+      <div class="corner-accent br"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== COMMUNITY ==================== -->
+<section class="community-section" id="community">
+  <div class="community-left">
+    <div class="community-content">
+      <div class="section-label">Community First</div>
+      <h2 class="community-headline">
+        Our Barbershop.<br>
+        The <span class="red">Local</span><br>
+        Foundation.
+      </h2>
+      <div class="story-divider"></div>
+      <p class="community-text">
+        Our commitment to the community is built into our foundation. From neighborhood events to first haircuts to game-day gatherings — Precision Line has always been more than four walls and a barber chair.
+      </p>
+
+      <!-- Community photos -->
+      <div class="community-photos">
+        <div class="community-photo">
+          <div class="community-photo-inner">
+            <svg class="community-photo-art" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+              <rect width="160" height="120" fill="#120A0A"/>
+              <radialGradient id="cg1" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#8B1A1A" stop-opacity="0.2"/>
+                <stop offset="100%" stop-opacity="0"/>
+              </radialGradient>
+              <rect width="160" height="120" fill="url(#cg1)"/>
+              <!-- Silhouetted barber scene -->
+              <!-- Chair silhouette -->
+              <rect x="45" y="40" width="70" height="50" rx="4" fill="#1A0808" opacity="0.9"/>
+              <rect x="50" y="25" width="60" height="22" rx="12" fill="#1E0C0C" opacity="0.8"/>
+              <!-- Barber standing -->
+              <ellipse cx="110" cy="32" rx="9" ry="9" fill="#1A1010"/>
+              <rect x="103" y="41" width="14" height="40" rx="3" fill="#1A1010"/>
+              <!-- Raised arm -->
+              <line x1="117" y1="48" x2="130" y2="38" stroke="#1A1010" stroke-width="6" stroke-linecap="round"/>
+              <!-- Client in chair -->
+              <ellipse cx="80" cy="36" rx="10" ry="10" fill="#150808"/>
+              <!-- Warm glow -->
+              <ellipse cx="80" cy="15" rx="40" ry="10" fill="#B8922A" opacity="0.08"/>
+            </svg>
+            <div class="community-photo-label">The Cut · Daily</div>
+          </div>
+        </div>
+
+        <div class="community-photo">
+          <div class="community-photo-inner">
+            <svg class="community-photo-art" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+              <rect width="160" height="120" fill="#0A0A0A"/>
+              <radialGradient id="cg2" cx="40%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#B8922A" stop-opacity="0.1"/>
+                <stop offset="100%" stop-opacity="0"/>
+              </radialGradient>
+              <rect width="160" height="120" fill="url(#cg2)"/>
+              <!-- Group gathering scene -->
+              <!-- People silhouettes -->
+              <ellipse cx="35" cy="45" rx="10" ry="10" fill="#181010"/>
+              <rect x="28" y="55" width="14" height="40" rx="3" fill="#181010"/>
+              <ellipse cx="75" cy="38" rx="11" ry="11" fill="#1A0C0C"/>
+              <rect x="67" y="49" width="16" height="45" rx="3" fill="#1A0C0C"/>
+              <ellipse cx="115" cy="42" rx="10" ry="10" fill="#181010"/>
+              <rect x="108" y="52" width="14" height="40" rx="3" fill="#181010"/>
+              <!-- Atmosphere - event lights -->
+              <circle cx="80" cy="15" r="5" fill="#B8922A" opacity="0.4"/>
+              <circle cx="40" cy="20" r="3" fill="#C0272D" opacity="0.3"/>
+              <circle cx="120" cy="18" r="3" fill="#B8922A" opacity="0.3"/>
+            </svg>
+            <div class="community-photo-label">Community Events</div>
+          </div>
+        </div>
+
+        <div class="community-photo">
+          <div class="community-photo-inner">
+            <svg class="community-photo-art" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+              <rect width="160" height="120" fill="#0E0808"/>
+              <radialGradient id="cg3" cx="60%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#8B1A1A" stop-opacity="0.15"/>
+                <stop offset="100%" stop-opacity="0"/>
+              </radialGradient>
+              <rect width="160" height="120" fill="url(#cg3)"/>
+              <!-- Close-up hand/tools scene -->
+              <!-- Hand silhouette -->
+              <path d="M50 80 Q55 50 65 40 Q70 35 75 38 Q80 35 82 40 Q87 35 88 42 Q94 36 94 45 Q100 42 98 55 L90 80 Q80 95 65 95 Z" fill="#1E1010"/>
+              <!-- Tool in hand -->
+              <rect x="73" y="20" width="8" height="25" rx="2" fill="#A89060"/>
+              <!-- Glow from tool -->
+              <ellipse cx="77" cy="25" rx="8" ry="4" fill="#B8922A" opacity="0.15"/>
+            </svg>
+            <div class="community-photo-label">Craft & Pride</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="community-right">
+    <div class="community-quote-block">
+      <div class="section-label" style="justify-content:center">What We Stand For</div>
+      <p class="community-quote">
+        "The barbershop has always been where the community finds itself. We just made sure it had a home."
+      </p>
+      <div class="quote-author">— The Precision Line Team · Blue Springs, MO</div>
+
+      <!-- Community stats -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;text-align:center;">
+        <div style="border:1px solid rgba(184,146,42,0.2);padding:20px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;color:var(--crimson-bright);letter-spacing:-0.02em;">13+</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.25em;color:var(--brass);text-transform:uppercase;margin-top:4px;">Years Serving</div>
+        </div>
+        <div style="border:1px solid rgba(184,146,42,0.2);padding:20px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;color:var(--crimson-bright);letter-spacing:-0.02em;">50+</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.25em;color:var(--brass);text-transform:uppercase;margin-top:4px;">5-Star Reviews</div>
+        </div>
+        <div style="border:1px solid rgba(184,146,42,0.2);padding:20px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;color:var(--crimson-bright);letter-spacing:-0.02em;">4</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.25em;color:var(--brass);text-transform:uppercase;margin-top:4px;">Expert Barbers</div>
+        </div>
+        <div style="border:1px solid rgba(184,146,42,0.2);padding:20px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;color:var(--crimson-bright);letter-spacing:-0.02em;">KC</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.25em;color:var(--brass);text-transform:uppercase;margin-top:4px;">Metro Roots</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SERVICES ==================== -->
+<section class="services-section" id="services">
+  <div class="services-header">
+    <div class="section-label" style="justify-content:center">What We Do</div>
+    <h2 class="services-headline">The <span class="red">Craft</span> of the Cut</h2>
+    <p style="font-family:'Barlow',sans-serif;font-size:0.9rem;font-weight:300;color:rgba(232,224,208,0.6);max-width:480px;margin:0 auto;letter-spacing:0.04em;">
+      Every service delivered with precision, pride, and the kind of care you can feel.
+    </p>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- Haircuts -->
+    <div class="service-card">
+      <div class="service-card-bg"></div>
+      <div class="service-card-corners">
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+      </div>
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="4" y1="4" x2="18" y2="18" stroke="#B8922A" stroke-width="2" stroke-linecap="round"/>
+          <line x1="6" y1="4" x2="20" y2="18" stroke="#B8922A" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="3" cy="6" r="3" fill="none" stroke="#B8922A" stroke-width="1.5"/>
+          <circle cx="7" cy="4" r="3" fill="none" stroke="#B8922A" stroke-width="1.5"/>
+          <line x1="14" y1="18" x2="24" y2="26" stroke="#B8922A" stroke-width="2" stroke-linecap="round"/>
+          <line x1="16" y1="18" x2="26" y2="24" stroke="#B8922A" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="service-title">Haircuts</div>
+      <p class="service-desc">Classic, fades, tapers, textures — every cut shaped to your head and your style. No guesswork, just precision.</p>
+      <div class="service-price">$30 <span>/ and up</span></div>
+    </div>
+
+    <!-- Beard Trims -->
+    <div class="service-card">
+      <div class="service-card-bg"></div>
+      <div class="service-card-corners">
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+      </div>
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Beard outline icon -->
+          <path d="M5 8 Q5 4 14 4 Q23 4 23 8 L23 18 Q23 26 14 26 Q5 26 5 18 Z" fill="none" stroke="#B8922A" stroke-width="1.5"/>
+          <!-- Mustache -->
+          <path d="M8 12 Q11 10 14 12 Q17 10 20 12" stroke="#B8922A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Trim lines -->
+          <line x1="5" y1="18" x2="23" y2="18" stroke="#B8922A" stroke-width="1" stroke-dasharray="2,2" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="service-title">Beard Trims</div>
+      <p class="service-desc">Shape, define, and clean up. From full beards to goatees — sculpted lines that frame the face right.</p>
+      <div class="service-price">$20 <span>/ and up</span></div>
+    </div>
+
+    <!-- Razor Shaves -->
+    <div class="service-card">
+      <div class="service-card-bg"></div>
+      <div class="service-card-corners">
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+      </div>
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Straight razor -->
+          <rect x="2" y="12" width="20" height="5" rx="1" fill="none" stroke="#B8922A" stroke-width="1.5"/>
+          <polygon points="22,12 28,14.5 22,17" fill="#B8922A"/>
+          <rect x="0" y="11" width="5" height="7" rx="1.5" fill="none" stroke="#B8922A" stroke-width="1.5"/>
+          <!-- Hot towel foam dots -->
+          <circle cx="19" cy="6" r="2" fill="#B8922A" opacity="0.6"/>
+          <circle cx="23" cy="4" r="1.5" fill="#B8922A" opacity="0.4"/>
+          <circle cx="16" cy="4" r="1.5" fill="#B8922A" opacity="0.5"/>
+          <circle cx="21" cy="2" r="1" fill="#B8922A" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="service-title">Razor Shaves</div>
+      <p class="service-desc">Hot towel prep, warm lather, straight-razor finish. The full treatment — luxury built into the everyday ritual.</p>
+      <div class="service-price">$40 <span>/ and up</span></div>
+    </div>
+
+    <!-- Facial Waxing -->
+    <div class="service-card">
+      <div class="service-card-bg"></div>
+      <div class="service-card-corners">
+        <div class="card-corner tl"></div>
+        <div class="card-corner tr"></div>
+        <div class="card-corner bl"></div>
+        <div class="card-corner br"></div>
+      </div>
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Wax strip icon -->
+          <rect x="3" y="9" width="22" height="10" rx="3" fill="none" stroke="#B8922A" stroke-width="1.5"/>
+          <!-- Peel-off edge -->
+          <path d="M20 9 Q24 7 25 9" stroke="#B8922A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Hair lines before -->
+          <line x1="7" y1="19" x2="6" y2="25" stroke="#B8922A" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          <line x1="11" y1="19" x2="10" y2="25" stroke="#B8922A" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          <line x1="15" y1="19" x2="14" y2="25" stroke="#B8922A" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          <!-- Smooth after mark -->
+          <line x1="3" y1="27" x2="25" y2="27" stroke="#B8922A" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="service-title">Facial Waxing</div>
+      <p class="service-desc">Brow shaping, nose, ears — clean, fast, clean. Precision waxing for the details that define the whole look.</p>
+      <div class="service-price">$15 <span>/ and up</span></div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:48px;position:relative;z-index:1;">
+    <a href="#contact" class="btn-cta-primary" style="display:inline-block">Book Your Service Today</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== MERCH ==================== -->
+<section class="merch-section" id="merch">
+  <div class="merch-header">
+    <div class="merch-eyebrow">Community Brand · Blue Springs, MO</div>
+    <h2 class="merch-headline">
+      The Merch. Wear Your Roots.<br>
+      <span class="red">The Clothing Line.</span>
+    </h2>
+    <p class="merch-sub">Precision Line apparel — wear the culture. Built for the community, by the community.</p>
+  </div>
+
+  <div class="merch-grid">
+
+    <!-- Item 1 -->
+    <div class="merch-card">
+      <div class="merch-frame">
+        <div class="merch-photo apparel-bg-1">
+          <div class="apparel-overlay"></div>
+          <svg viewBox="0 0 300 380" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+            <rect width="300" height="380" fill="#111"/>
+            <!-- T-shirt shape -->
+            <path d="M70 80 L50 100 L70 120 L80 110 L80 280 L220 280 L220 110 L230 120 L250 100 L230 80 L200 95 Q165 75 135 75 Q115 75 100 95 Z" fill="#1E1E1E" stroke="#2A2A2A" stroke-width="1"/>
+            <!-- Iron & Edge logo on shirt -->
+            <text x="150" y="180" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="20" fill="#C0272D" letter-spacing="2">PRECISION</text>
+            <text x="150" y="202" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="20" fill="#C0272D" letter-spacing="2">LINE</text>
+            <line x1="110" y1="210" x2="190" y2="210" stroke="#B8922A" stroke-width="1"/>
+            <text x="150" y="225" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="8" fill="#B8922A" letter-spacing="3">BLUE SPRINGS · MO</text>
+            <!-- Chest pocket detail -->
+            <rect x="112" y="130" width="28" height="22" rx="2" fill="none" stroke="#B8922A" stroke-width="0.8" opacity="0.6"/>
+            <!-- Shirt texture highlight -->
+            <rect x="80" y="80" width="140" height="200" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+          </svg>
+          <div class="frame-rivet tl"></div>
+          <div class="frame-rivet tr"></div>
+          <div class="frame-rivet bl"></div>
+          <div class="frame-rivet br"></div>
+        </div>
+        <div class="apparel-label-badge">Best Seller</div>
+      </div>
+      <div class="merch-info">
+        <div class="merch-category">Classic Tee · Community Brand</div>
+        <div class="merch-item-name">Precision Line Signature Tee</div>
+        <p class="merch-desc">100% heavyweight cotton. Distressed logo print. Community-first design — the shop's mark worn with pride.</p>
+        <div class="merch-footer">
+          <div class="merch-price">$35</div>
+          <a href="#" class="btn-view-details">View Details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="merch-card">
+      <div class="merch-frame">
+        <div class="merch-photo apparel-bg-2">
+          <div class="apparel-overlay"></div>
+          <svg viewBox="0 0 300 380" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+            <rect width="300" height="380" fill="#0A0A0A"/>
+            <!-- Hoodie shape -->
+            <path d="M65 90 L40 105 L60 130 L75 118 L75 290 L225 290 L225 118 L240 130 L260 105 L235 90 L215 100 Q185 72 150 70 Q125 70 105 82 Q90 90 85 100 Z" fill="#181818" stroke="#222" stroke-width="1"/>
+            <!-- Hood detail -->
+            <path d="M105 82 Q120 68 150 66 Q180 66 195 80 Q185 72 150 70 Q115 72 105 82 Z" fill="#1E1E1E"/>
+            <!-- Kangaroo pocket -->
+            <rect x="100" y="200" width="100" height="60" rx="4" fill="#141414" stroke="#222" stroke-width="1"/>
+            <!-- Logo on chest -->
+            <text x="150" y="155" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="900" font-size="28" fill="#8B1A1A" letter-spacing="3">P L</text>
+            <text x="150" y="174" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="8" fill="#B8922A" letter-spacing="3">BARBERSHOP</text>
+            <!-- Hoodie drawstrings -->
+            <line x1="145" y1="95" x2="148" y2="140" stroke="#2A2A2A" stroke-width="2" stroke-linecap="round"/>
+            <line x1="155" y1="95" x2="152" y2="140" stroke="#2A2A2A" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="frame-rivet tl"></div>
+          <div class="frame-rivet tr"></div>
+          <div class="frame-rivet bl"></div>
+          <div class="frame-rivet br"></div>
+        </div>
+        <div class="apparel-label-badge">New Drop</div>
+      </div>
+      <div class="merch-info">
+        <div class="merch-category">Premium Hoodie · Limited Edition</div>
+        <div class="merch-item-name">P L Pullover Hoodie</div>
+        <p class="merch-desc">Heavyweight fleece. Embroidered logo. Built for the streets, the shop, and everything between.</p>
+        <div class="merch-footer">
+          <div class="merch-price">$65</div>
+          <a href="#" class="btn-view-details">View Details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="merch-card">
+      <div class="merch-frame">
+        <div class="merch-photo apparel-bg-3">
+          <div class="apparel-overlay"></div>
+          <svg viewBox="0 0 300 380" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+            <rect width="300" height="380" fill="#0D0D0D"/>
+            <!-- Snapback hat shape -->
+            <!-- Brim -->
+            <path d="M80 220 Q150 200 220 220 L240 230 Q220 235 150 232 Q80 235 60 230 Z" fill="#1A1A1A" stroke="#222" stroke-width="1"/>
+            <!-- Crown -->
+            <path d="M90 220 Q90 140 150 120 Q210 140 210 220 Z" fill="#181818" stroke="#222" stroke-width="1"/>
+            <!-- Panel seams -->
+            <line x1="150" y1="120" x2="150" y2="220" stroke="#222" stroke-width="1"/>
+            <line x1="120" y1="122" x2="90" y2="220" stroke="#222" stroke-width="1"/>
+            <line x1="180" y1="122" x2="210" y2="220" stroke="#222" stroke-width="1"/>
+            <!-- Logo patch on front panel -->
+            <rect x="128" y="158" width="44" height="34" rx="2" fill="#8B1A1A" opacity="0.9"/>
+            <text x="150" y="172" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="900" font-size="10" fill="#F5F0E8" letter-spacing="1">P</text>
+            <text x="150" y="185" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="900" font-size="10" fill="#F5F0E8" letter-spacing="1">LINE</text>
+            <!-- Snapback back -->
+            <rect x="108" y="223" width="84" height="8" rx="2" fill="#141414" stroke="#222" stroke-width="1"/>
+            <!-- Button on top -->
+            <circle cx="150" cy="122" r="5" fill="#B8922A"/>
+            <!-- Brim underside pattern -->
+            <path d="M80 226 Q150 218 220 226" stroke="#B8922A" stroke-width="0.5" fill="none" opacity="0.3"/>
+          </svg>
+          <div class="frame-rivet tl"></div>
+          <div class="frame-rivet tr"></div>
+          <div class="frame-rivet bl"></div>
+          <div class="frame-rivet br"></div>
+        </div>
+        <div class="apparel-label-badge">Community Pick</div>
+      </div>
+      <div class="merch-info">
+        <div class="merch-category">Snapback Cap · Core Collection</div>
+        <div class="merch-item-name">Precision Line Snapback</div>
+        <p class="merch-desc">6-panel structured snapback. Embroidered logo patch. The cap that puts the shop on the block.</p>
+        <div class="merch-footer">
+          <div class="merch-price">$40</div>
+          <a href="#" class="btn-view-details">View Details</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="merch-community-bar">
+    <div class="community-brand-badge">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="16,2 20,12 30,12 22,19 25,29 16,23 7,29 10,19 2,12 12,12" fill="none" stroke="#B8922A" stroke-width="1.5"/>
+        <polygon points="16,6 19,14 27,14 21,19 23,27 16,22 9,27 11,19 5,14 13,14" fill="#8B1A1A" opacity="0.4"/>
+      </svg>
+      <div class="community-brand-text">
+        <strong>Community Brand</strong> — Every purchase supports local.
+      </div>
+      <a href="#" class="btn-view-details">Shop Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="contact-section" id="contact">
+  <div class="contact-left">
+    <div class="contact-content">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="contact-headline">
+        Book Your Chair.<br>
+        <span class="red">Reserve Your Seat.</span>
+      </h2>
+      <p class="contact-sub">Walk-ins welcome. Online booking available 7 days a week.</p>
+
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-field">
+            <input type="text" placeholder="First Name">
+          </div>
+          <div class="form-field">
+            <input type="text" placeholder="Last Name">
+          </div>
+        </div>
+        <div class="form-field">
+          <input type="email" placeholder="Email Address">
+        </div>
+        <div class="form-field">
+          <input type="tel" placeholder="Phone Number">
+        </div>
+        <div class="form-field">
+          <select style="color:rgba(232,224,208,0.5)">
+            <option value="" disabled selected>Select a Service</option>
+            <option value="haircut" style="background:#111;color:#F5F0E8">Haircut — from $30</option>
+            <option value="beard" style="background:#111;color:#F5F0E8">Beard Trim — from $20</option>
+            <option value="shave" style="background:#111;color:#F5F0E8">Razor Shave — from $40</option>
+            <option value="wax" style="background:#111;color:#F5F0E8">Facial Waxing — from $15</option>
+            <option value="combo" style="background:#111;color:#F5F0E8">Cut + Beard Combo</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <textarea placeholder="Preferred date, time, or any notes for your barber..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Book My Appointment</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <div class="map-area">
+      <!-- Dark industrial map simulation -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+        <!-- Roads -->
+        <rect x="0" y="120" width="500" height="12" fill="#222"/>
+        <rect x="0" y="280" width="500" height="12" fill="#222"/>
+        <rect x="0" y="440" width="500" height="12" fill="#222"/>
+        <rect x="80" y="0" width="12" height="600" fill="#222"/>
+        <rect x="240" y="0" width="12" height="600" fill="#222"/>
+        <rect x="400" y="0" width="12" height="600" fill="#222"/>
+        <!-- City blocks -->
+        <rect x="92" y="132" width="148" height="148" rx="2" fill="#181818"/>
+        <rect x="252" y="132" width="148" height="148" rx="2" fill="#1A1A1A"/>
+        <rect x="92" y="292" width="148" height="148" rx="2" fill="#1A1A1A"/>
+        <rect x="252" y="292" width="148" height="148" rx="2" fill="#181818"/>
+        <!-- Building footprints -->
+        <rect x="100" y="140" width="50" height="35" rx="1" fill="#212121"/>
+        <rect x="160" y="140" width="70" height="45" rx="1" fill="#1E1E1E"/>
+        <rect x="100" y="185" width="80" height="50" rx="1" fill="#202020"/>
+        <!-- Pin markers -->
+        <circle cx="175" cy="205" r="6" fill="#C0272D"/>
+        <line x1="175" y1="205" x2="175" y2="185" stroke="#C0272D" stroke-width="1.5"/>
+        <circle cx="310" cy="320" r="4" fill="#B8922A" opacity="0.7"/>
+      </svg>
+
+      <div class="map-info-card">
+        <div class="map-shop-name">Precision Line Barbershop</div>
+        <div class="map-address">
+          📍 Blue Springs, MO 64014<br>
+          Kansas City Metro Area
+        </div>
+        <div class="map-hours">Mon–Sat: 9AM–7PM · Sun: 10AM–5PM</div>
+        <div style="margin-top:14px;display:flex;gap:8px;">
+          <a href="#" style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--crimson-bright);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(192,39,45,0.3);padding-bottom:1px;">Get Directions ↗</a>
+          <a href="#" style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--brass);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(184,146,42,0.3);padding-bottom:1px;">Call Us ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top-border"></div>
+
+  <!-- Barber tools background pattern -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.03;pointer-events:none" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Scattered barber tool silhouettes -->
+    <g fill="#F5F0E8">
+      <!-- Scissors -->
+      <path d="M50 50 L80 90 M60 50 L90 90 M43 58 A8 8 0 1 1 59 58 M55 58 A8 8 0 1 1 71 58" stroke="#F5F0E8" stroke-width="2" fill="none"/>
+      <!-- Comb -->
+      <rect x="150" y="60" width="80" height="12" rx="1"/>
+      <rect x="155" y="72" width="3" height="10" rx="1"/><rect x="162" y="72" width="3" height="10" rx="1"/><rect x="169" y="72" width="3" height="10" rx="1"/><rect x="176" y="72" width="3" height="10" rx="1"/><rect x="183" y="72" width="3" height="10" rx="1"/>
+      <!-- Beer glass mug -->
+      <rect x="300" y="40" width="35" height="55" rx="4" fill="none" stroke="#F5F0E8" stroke-width="2"/>
+      <path d="M335 52 Q350 52 350 62 Q350 72 335 72" stroke="#F5F0E8" stroke-width="2" fill="none"/>
+      <!-- Razor -->
+      <rect x="450" y="55" width="80" height="10" rx="2"/>
+      <polygon points="530,55 545,60 530,65"/>
+      <!-- More scissors -->
+      <path d="M600 80 L630 120 M610 80 L640 120" stroke="#F5F0E8" stroke-width="2" fill="none"/>
+      <!-- More combs -->
+      <rect x="680" y="50" width="60" height="10" rx="1"/>
+      <!-- Beer glass 2 -->
+      <rect x="100" y="250" width="30" height="50" rx="4" fill="none" stroke="#F5F0E8" stroke-width="2"/>
+      <!-- Straight razor -->
+      <rect x="250" y="240" width="90" height="8" rx="1"/>
+      <rect x="242" y="238" width="15" height="12" rx="2" fill="none" stroke="#F5F0E8" stroke-width="1.5"/>
+      <!-- Brush -->
+      <rect x="500" y="250" width="18" height="50" rx="3"/>
+      <rect x="493" y="280" width="32" height="22" rx="2"/>
+    </g>
+  </svg>
+
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-logo-col">
+        <a href="#" class="logo" style="text-decoration:none;margin-bottom:8px;display:inline-flex;align-items:center;gap:12px;">
+          <svg width="36" height="36" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="20" width="24" height="6" rx="1" fill="#B8922A" opacity="0.9"/>
+            <rect x="4" y="20" width="2" height="12" rx="0.5" fill="#B8922A"/>
+            <rect x="8" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+            <rect x="12" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+            <rect x="16" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+            <rect x="20" y="20" width="1.5" height="10" rx="0.5" fill="#B8922A"/>
+            <rect x="24" y="20" width="2" height="6" rx="0.5" fill="#B8922A"/>
+            <line x1="30" y1="8" x2="42" y2="38" stroke="#C0272D" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="30" cy="8" r="2" fill="#C0272D"/>
+            <polygon points="40,34 44,42 36,38" fill="#C0272D"/>
+          </svg>
+          <span class="logo-name">Precision Line</span>
+        </a>
+        <p class="footer-brand-text">
+          A premium barbershop built on craft, community, and the relentless pursuit of the perfect cut. Serving Blue Springs, MO and the KC Metro since 2019.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-icon" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" title="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" title="Google">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 11h8.5c.3 1 .5 2 .5 3.3 0 5-3.4 8.7-9 8.7-5.5 0-10-4.5-10-10S6.5 3 12 3c2.7 0 4.9 1 6.6 2.6l-2.7 2.6C14.8 7.1 13.5 6.5 12 6.5c-3 0-5.5 2.5-5.5 5.5s2.5 5.5 5.5 5.5c2.4 0 4.2-1.2 4.9-3H12v-3.5z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" title="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l-.01-8.65a8.16 8.16 0 0 0 4.77 1.52V4.74a4.85 4.85 0 0 1-1-.05z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">Haircuts</a></li>
+          <li><a href="#">Beard Trims</a></li>
+          <li><a href="#">Razor Shaves</a></li>
+          <li><a href="#">Facial Waxing</a></li>
+          <li><a href="#">Full Packages</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">The Shop</div>
+        <ul class="footer-links">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">The Team</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Merch / Shop</a></li>
+          <li><a href="#">Book Online</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Find Us</div>
+        <div class="footer-address">
+          <strong>Address</strong>
+          Blue Springs, MO 64014<br>
+          Kansas City Metro<br><br>
+          <strong>Hours</strong>
+          Mon–Fri: 9AM – 7PM<br>
+          Sat: 9AM – 6PM<br>
+          Sun: 10AM – 5PM<br><br>
+          <strong>Book</strong>
+          <a href="#" style="color:var(--crimson-bright);text-decoration:none;font-size:0.82rem;">Online Booking ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2025 <span>Precision Line Barbershop</span> · Blue Springs, MO · All Rights Reserved
+      </div>
+      <div class="footer-copy" style="display:flex;gap:20px;">
+        <a href="#" style="color:rgba(232,224,208,0.3);text-decoration:none;font-size:0.72rem;transition:color 0.2s;" onmouseover="this.style.color='rgba(232,224,208,0.6)'" onmouseout="this.style.color='rgba(232,224,208,0.3)'">Privacy Policy</a>
+        <a href="#" style="color:rgba(232,224,208,0.3);text-decoration:none;font-size:0.72rem;transition:color 0.2s;" onmouseover="this.style.color='rgba(232,224,208,0.6)'" onmouseout="this.style.color='rgba(232,224,208,0.3)'">Terms of Service</a>
+        <a href="#" style="color:var(--brass);text-decoration:none;font-size:0.72rem;opacity:0.6;">Book Now →</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observerOpts = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOpts);
+
+  // Observe sections for reveal
+  document.querySelectorAll('.story-content, .community-content, .community-quote-block, .service-card, .merch-card, .contact-content, .merch-header, .services-header').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = `opacity 0.7s ease ${i * 0.07}s, transform 0.7s ease ${i * 0.07}s`;
+    observer.observe(el);
+  });
+
+  // Header scroll behavior
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      header.style.borderBottomColor = 'rgba(192,39,45,0.25)';
+    } else {
+      header.style.borderBottomColor = 'rgba(184,146,42,0.2)';
+    }
+  });
+
+  // Subtle parallax on hero precision mark
+  const precisionMark = document.querySelector('.precision-mark');
+  if (precisionMark) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      precisionMark.style.transform = `translateY(${y * 0.15}px) rotate(${y * 0.02}deg)`;
+    });
+  }
+</script>
+
+</body>
+</html>
